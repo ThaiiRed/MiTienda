@@ -1,0 +1,54 @@
+﻿@page "/counter"
+
+<h1>Calcular</h1>
+
+<p role="status">Total: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Somar 1</button>
+<button class="btn btn-primary" @onclick="IncrementCount5">Somar 5</button>
+<button class="btn btn-primary" @onclick="IncrementCount10">Somar 10</button><br /><br />
+<button class="btn btn-danger" @onclick="MostrarMensagem" title="Esse botão vai mostrar uma mensagem">@titulo</button>
+<button class="btn btn-primary" @onclick="IncrementCountX10" style="background-color:green">X10</button>
+
+<p>@mensagem</p>
+
+@code {
+    private string mensagem = "";
+    private string titulo = "Mostrar";
+    private int currentCount = 0;
+
+
+    private void MostrarMensagem()
+    {
+        if(titulo == "Mostrar")
+        {
+            mensagem = "Mensagem mostrada!";
+            titulo = "Esconder";
+        }
+        else
+        {
+            mensagem = "";
+            titulo = "Mostrar";
+        }
+    }
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void IncrementCount5()
+    {
+        currentCount = currentCount + 5;
+    }
+
+    private void IncrementCount10()
+    {
+        currentCount = currentCount + 10;
+    }
+
+    private void IncrementCountX10()
+    {
+        currentCount = currentCount * 10;
+    }
+}
