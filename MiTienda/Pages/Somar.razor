@@ -1,0 +1,57 @@
+﻿@page "/somar"
+
+<h3>Somar</h3>
+
+<p>
+    Nota 1: 
+    <input placeholder="Insira a primeira nota" @bind="nota1" />
+</p>
+
+<p>
+    Nota 2: 
+    <input placeholder="Insira a segunda nota" @bind="nota2"/>
+</p>
+
+<p>
+    <button class="btn btn-info" @onclick="Calcular">Calcular média</button>
+</p>
+
+<p>
+    @mensagem
+</p>
+
+@code {
+    /*public string? strNota1;
+    public string? strNota2;
+    public string? mensagem;
+
+    private void Calcular()
+    {
+        if(!string.IsNullOrEmpty(strNota1) && !string.IsNullOrEmpty(strNota2))
+        {
+            double nota1 = Convert.ToDouble(strNota1);
+            double nota2 = Convert.ToDouble(strNota2);
+            double media = (nota1 + nota2) / 2;
+
+            if(media >= 7)
+                mensagem = $"Parabéns! Você aprovou com uma média de {media}";
+            else
+                mensagem = $"Que pena! Você reprovou com uma média de {media}";
+        }
+
+    }*/
+
+    private double nota1;
+    private double nota2;
+    private string? mensagem;
+
+    private void Calcular()
+    {
+        double media = (nota1 + nota2) / 2;
+        if(media >= 7)
+            mensagem = $"Parabéns! Você aprovou com uma média de {media}";
+        else
+            mensagem = $"Que pena! Você reprovou com uma média de {media}";
+    }
+
+}
