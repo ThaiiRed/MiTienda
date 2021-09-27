@@ -1,0 +1,58 @@
+﻿@page "/todo"
+
+<h3>Lista de Tarefas</h3>
+
+    <!-- Esta linha é para ter um imput de um informe de uma nova tarefa e depositar ele na var novaTarefa. O bind é usado para unir 
+    o html com a var (novaTarefa que está no code)-->
+    <input @bind="novaTarefa" placeholder="Informe uma tarefa"/>
+    <!-- Aqui serve para criar um botão (de aparência do tipo btn-primary)"Adicionar Tarefa" que ao onclick executa o método 
+    AdicionarTarefa-->
+    <button @onclick="AdicionarTarefa" class="btn btn-primary">Adicionar Tarefa</button>
+
+    <ul class="list-group">
+        <!-- Membros da lista feitos com html sendo estáticos-->
+        <!--<li>Comprar comida</li>
+        <li>Estudar LTPA</li>
+        <li>Fazer Atividade 1</li>-->
+
+        <!-- Aqui ser cria a lista dinâmica que adiciona cada item na lista toDos. Aqui só é inserido o valor do Titulo do objeto da lista-->
+        <!--Isto é só para exibir e ter a possibilidade de dar o checked-->
+        @foreach (var item in toDos)
+        {
+            <li class="list-group-item">
+                <input @bind="item.Feito" type="checkbox"/>
+                <span style="@FeitoStyle(item.Feito)">@item.Titulo</span>
+            </li>
+        }
+    </ul>
+
+@code {
+    <!-- Criando uma lista com o nome de toDos de tipo da Classe ToDoModel -que contém os atributos Titulo e Feito- -->
+    private List<ToDoModel> toDos = new();
+    <!-- Aqui está a var que recebe o input por meio del bind de Informe uma tarefa-->
+    private string novaTarefa;
+
+    private void AdicionarTarefa()
+    {
+        <!-- Só vai pegar o valor da var novaTarefa que foi inserido pela tag input e AdicionarTarefa na lista, se o conteúdo não 
+        for nulo nem estiver em branco-->
+        if(!string.IsNullOrWhiteSpace(novaTarefa))
+        {
+            <!-- Vai add na lista toDos um novo objeto ToDoModel/Tarefa. Adicionara o Titulo/nome da novaTarefa-->
+            toDos.Add(new ToDoModel()
+            {  
+                Titulo = novaTarefa
+            });
+            <!-- Tem que deixar sem nada para que não fique sendo add uma tarefa que já foi cadastrada na vez anterior-->
+    novaTarefa = "";
+        }
+    }
+
+    <!--Traz o Feito del objeto para o parametro feito, se for vdd então é retornado o txt que será inserido lá no style do span
+    que marcará o Titulo da tarefa com italic e com uma line-through indicando que a tarefa foi feita-->
+    <!--Se não foi feito, o style fica "", vazio-->
+    private string FeitoStyle(bool feito)
+    {
+        return feito ? "font-style: italic; text-decoration: line-through;" : "";
+    }
+}
