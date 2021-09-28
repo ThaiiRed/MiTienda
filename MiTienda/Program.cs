@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using MiTienda.Data;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+/*Bd inicializa*/                                                      /*Cada BD define uma STRING Conexão*/
+builder.Services.AddDbContext<LojaContext>(options => options.UseSqlite("Data source = LojaDb.sqLite"));
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();

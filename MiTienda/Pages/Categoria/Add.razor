@@ -1,0 +1,32 @@
+﻿@page "/add"
+@inject LojaContext loja
+
+<h3>Adicionar Categoria</h3>
+<p>
+    Categoria: <input type="text" @bind="novaCategoria"/>
+</p>
+<p>
+    <button class="btn btn-info" @onclick="Adicionar">Adicionar Categoria</button>
+</p>
+
+<div class="alert alert-success">@mensagem</div>
+
+@code {
+
+    private string novaCategoria; 
+    private string mensagem = "";
+    
+    private void Adicionar()
+    {
+        var categoria = new Categoria
+        {
+            Descricao = novaCategoria
+        };
+        loja.Categorias.Add(categoria);
+        // Salva alteração no BD :D
+        loja.SaveChanges();
+
+        mensagem = "Categoria adicionada";
+    }
+
+}
